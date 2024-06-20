@@ -32,12 +32,14 @@ namespace Project.Gameplay
         {
             _systems.
                 Add(new PlayerInputSystem()).
-                Add(new MovementSystem());
+                Add(new MovementSystem()).
+                Add(new ItemFactorySystem());
         }
 
         private void AddOneFrames()
         {
-
+            _systems.
+                OneFrame<ItemExchangeEvent>();
         }
 
         private void Update() => _systems.Run();

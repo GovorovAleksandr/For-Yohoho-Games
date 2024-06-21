@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using Project.Reusable;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -17,8 +18,8 @@ namespace Project.Gameplay
             _systems.ConvertScene();
 
             AddInjections();
-            AddSystems();
             AddOneFrames();
+            AddSystems();
 
             _systems.Init();
         }
@@ -31,15 +32,22 @@ namespace Project.Gameplay
         private void AddSystems()
         {
             _systems.
+                Add(new EntityInitializeSystem()).
                 Add(new PlayerInputSystem()).
                 Add(new MovementSystem()).
-                Add(new ItemFactorySystem());
+                Add(new ItemStackSystem()).
+                Add(new ItemExchangeSystem()).
+                Add(new FactoryTimerBlockSystem()).
+                Add(new ItemFactorySystem()).
+                Add(new PushItemSystem());
         }
 
         private void AddOneFrames()
         {
             _systems.
-                OneFrame<ItemExchangeEvent>();
+                OneFrame<InitializeEntityRequest>().
+                OneFrame<ItemExchangeEvent>().
+                OneFrame<PushItemEvent>();
         }
 
         private void Update() => _systems.Run();

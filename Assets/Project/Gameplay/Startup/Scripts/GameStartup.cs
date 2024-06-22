@@ -35,19 +35,25 @@ namespace Project.Gameplay
                 Add(new EntityInitializeSystem()).
                 Add(new PlayerInputSystem()).
                 Add(new MovementSystem()).
-                Add(new ItemStackSystem()).
-                Add(new ItemExchangeSystem()).
                 Add(new FactoryTimerBlockSystem()).
                 Add(new ItemFactorySystem()).
-                Add(new PushItemSystem());
+                Add(new ItemStackSystem()).
+                Add(new StackFullSystem()).
+                Add(new RemoveItemsSystem()).
+                Add(new ClearStackSystem()).
+                Add(new TrySendItemSystem()).
+                Add(new PushItemSystem()).
+                Add(new OvenRecipeCheckSystem()).
+                Add(new OvenCookSystem());
         }
 
         private void AddOneFrames()
         {
             _systems.
-                OneFrame<InitializeEntityRequest>().
-                OneFrame<ItemExchangeEvent>().
-                OneFrame<PushItemEvent>();
+                OneFrame<SuccessfullyPush>().
+                OneFrame<PushItemEvent>().
+                OneFrame<RemoveItemsEvent>().
+                OneFrame<OvenCookComponent>();
         }
 
         private void Update() => _systems.Run();

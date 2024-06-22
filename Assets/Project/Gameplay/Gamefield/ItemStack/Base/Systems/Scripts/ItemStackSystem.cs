@@ -12,6 +12,8 @@ namespace Project.Gameplay
             {
                 ref var component = ref _filter.Get1(i);
                 component.Stack = new();
+
+                ref var entity = ref _filter.GetEntity(i);
             }
         }
     }

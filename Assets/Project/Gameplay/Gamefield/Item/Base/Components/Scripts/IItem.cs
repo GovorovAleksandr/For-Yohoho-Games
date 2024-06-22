@@ -4,6 +4,6 @@ namespace Project.Gameplay
 {
     internal interface IItem
     {
-        GameObject GameObject { get; set; }
+        Transform Transform { get; set; }
     }
 }

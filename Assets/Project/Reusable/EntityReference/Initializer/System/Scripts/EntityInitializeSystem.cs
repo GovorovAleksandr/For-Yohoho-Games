@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Reusable
 {
-    public class EntityInitializeSystem : IEcsRunSystem
+    internal class EntityInitializeSystem : IEcsRunSystem
     {
         private readonly EcsFilter<InitializeEntityRequest> _filter = null;
 
@@ -14,8 +14,8 @@ namespace Project.Reusable
                 ref var entity = ref _filter.GetEntity(i);
                 ref var request = ref _filter.Get1(i);
                 request.Reference.Entity = entity;
-                Debug.Log(entity.IsAlive());
-                Debug.Log("gsfdfd");
+
+                entity.Del<InitializeEntityRequest>();
             }
         }
     }

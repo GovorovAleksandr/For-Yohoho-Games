@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Gameplay
 {
+    [Serializable]
     internal struct ItemStackComponent
     {
-        public Stack<IItem> Stack;
-        public IItem LastItem;
-        public Transform Parent;
+        public int MaxItemCount;
+        public Transform ItemsParent;
+        [HideInInspector] public Stack<ItemComponent> Stack;
     }
 }

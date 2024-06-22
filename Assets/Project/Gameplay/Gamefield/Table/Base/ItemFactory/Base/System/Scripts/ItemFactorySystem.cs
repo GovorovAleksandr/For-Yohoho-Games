@@ -7,28 +7,27 @@ namespace Project.Gameplay
     {
         private readonly
             EcsFilter<ItemFactoryComponent>.
-            Exclude<FactoryTimerBlockComponent, FactoryFull> _factoryFilter = null;
+            Exclude<FactoryTimerBlockComponent, StackFull> _filter = null;
 
         public void Run()
         {
-            foreach(var i in _factoryFilter)
+            foreach(var i in _filter)
             {
-                ref var factory = ref _factoryFilter.Get1(i);
+                ref var factory = ref _filter.Get1(i);
 
                 var prefab = factory.Prefab;
-                var parent = factory.Parent;
-                var position = factory.SpawnPosition + parent.transform.position;
 
-                var spawnedObject = Object.Instantiate(prefab, position, Quaternion.identity, parent);
-                ItemComponent item = new(spawnedObject);
+                var spawnedObject = Object.Instantiate(prefab);
 
-                ref var entity = ref _factoryFilter.GetEntity(i);
-                entity.Get<PushItemEvent>().Item = item;
+                ItemComponent item = new()
+                {
+                    Type = spawnedObject.Type,
+                    Transform = spawnedObject.transform
+                };
 
-                factory.CurrentSpawns++;
+                ref var entity = ref _filter.GetEntity(i);
 
-                if(factory.CurrentSpawns == factory.MaxSpawns) entity.Get<FactoryFull>();
-
+                entity.Get<PushItemEvent>().ItemComponent = item;
                 entity.Get<FactoryTimerBlockComponent>().TimeLeft = factory.SpawnInterval;
             }
         }

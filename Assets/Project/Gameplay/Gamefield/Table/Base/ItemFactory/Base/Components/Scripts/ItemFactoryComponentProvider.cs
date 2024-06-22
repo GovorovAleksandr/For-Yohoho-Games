@@ -2,8 +2,5 @@
 
 namespace Project.Gameplay
 {
-    internal class ItemFactoryComponentProvider : MonoProvider<ItemFactoryComponent>
-    {
-        private void Awake() => value.Parent = transform;
-    }
+    internal class ItemFactoryComponentProvider : MonoProvider<ItemFactoryComponent> { }
 }

@@ -2,10 +2,9 @@ using UnityEngine;
 
 namespace Project.Gameplay
 {
-    internal struct ItemComponent : IItem
+    internal struct ItemComponent
     {
-        public GameObject GameObject { get; set; }
-
-        public ItemComponent(GameObject gameObject) => GameObject = gameObject;
+        public Transform Transform;
+        public ItemTypes Type;
     }
 }

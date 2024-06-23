@@ -19,8 +19,6 @@ namespace Project.Gameplay
                 foreach(var item in removeItemsEvent.Items) Object.Destroy(item.Transform.gameObject);
 
                 stackComponent.Stack.Remove(removeItemsEvent.Items);
-
-                Debug.Log("remove");
             }
         }
     }

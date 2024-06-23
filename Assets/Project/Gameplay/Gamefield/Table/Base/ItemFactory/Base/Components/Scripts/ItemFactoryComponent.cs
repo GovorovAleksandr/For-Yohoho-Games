@@ -5,7 +5,7 @@ namespace Project.Gameplay
     [Serializable]
     internal struct ItemFactoryComponent
     {
-        public ItemConfig Prefab;
+        public ItemType Prefab;
         public float SpawnInterval;
     }
 }

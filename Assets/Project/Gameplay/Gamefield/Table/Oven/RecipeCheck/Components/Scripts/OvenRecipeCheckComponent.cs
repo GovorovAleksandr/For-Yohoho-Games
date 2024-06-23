@@ -1,12 +1,12 @@
+using Project.Reusable;
 using System;
-using UnityEngine;
 
 namespace Project.Gameplay
 {
     [Serializable]
     internal struct OvenRecipeCheckComponent
     {
-        public ItemConfig ResultItemPrefab;
+        public EntityReference ResultEntityReference;
 
         public int BunTarget;
         public int CutletTarget;

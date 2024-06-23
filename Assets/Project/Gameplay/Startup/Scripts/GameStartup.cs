@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using Project.Gameplay.UI;
 using Project.Reusable;
 using UnityEngine;
 using Voody.UniLeo;
@@ -40,11 +41,17 @@ namespace Project.Gameplay
                 Add(new ItemStackSystem()).
                 Add(new StackFullSystem()).
                 Add(new RemoveItemsSystem()).
+                Add(new SuccessfullyClearSystem()).
                 Add(new ClearStackSystem()).
                 Add(new TrySendItemSystem()).
                 Add(new PushItemSystem()).
+                Add(new StackCountViewSystem()).
                 Add(new OvenRecipeCheckSystem()).
-                Add(new OvenCookSystem());
+                Add(new OvenCookSystem()).
+                Add(new OvenCookSystem()).
+                Add(new CashSystem()).
+                Add(new SellSystem()).
+                Add(new BalanceViewSystem());
         }
 
         private void AddOneFrames()
@@ -52,8 +59,9 @@ namespace Project.Gameplay
             _systems.
                 OneFrame<SuccessfullyPush>().
                 OneFrame<PushItemEvent>().
+                OneFrame<SuccessfullyClear>().
                 OneFrame<RemoveItemsEvent>().
-                OneFrame<OvenCookComponent>();
+                OneFrame<SellEvent>();
         }
 
         private void Update() => _systems.Run();

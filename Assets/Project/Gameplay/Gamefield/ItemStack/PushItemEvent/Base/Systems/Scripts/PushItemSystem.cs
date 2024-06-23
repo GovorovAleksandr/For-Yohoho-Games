@@ -30,8 +30,6 @@ namespace Project.Gameplay
                 if (stackComponent.Stack.Count == stackComponent.MaxItemCount) entity.Get<StackFull>();
 
                 entity.Get<SuccessfullyPush>().Item = item;
-
-                Debug.Log("push");
             }
         }
     }

@@ -1,6 +1,4 @@
 ﻿using Leopotam.Ecs;
-using UnityEditor;
-using UnityEngine;
 
 namespace Project.Gameplay
 {

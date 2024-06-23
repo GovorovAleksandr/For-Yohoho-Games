@@ -17,9 +17,12 @@ namespace Project.Gameplay
             if (!other.CompareTag(PLAYER_TAG)) return;
 
             if(other.TryGetComponent(out EntityReference playerEntityReference))
-            {
-                _entityReference.Entity.Get<TrySendItemEvent>().Recipient = playerEntityReference.Entity;
-            }
+                TrySend(playerEntityReference.Entity);
+        }
+
+        private void TrySend(EcsEntity entity)
+        {
+            _entityReference.Entity.Get<TrySendItemEvent>().Recipient = entity;
         }
     }
 }

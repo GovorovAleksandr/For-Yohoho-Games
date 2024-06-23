@@ -1,4 +1,5 @@
 ﻿using Leopotam.Ecs;
+using Project.Reusable;
 using UnityEngine;
 
 namespace Project.Gameplay
@@ -19,15 +20,16 @@ namespace Project.Gameplay
 
                 var spawnedObject = Object.Instantiate(prefab);
 
-                ItemComponent item = new()
+                var itemComponent = new ItemComponent()
                 {
+                    Transform = spawnedObject.Transform,
                     Type = spawnedObject.Type,
-                    Transform = spawnedObject.transform
+                    EntityReferece = spawnedObject.EntityReference
                 };
 
                 ref var entity = ref _filter.GetEntity(i);
 
-                entity.Get<PushItemEvent>().ItemComponent = item;
+                entity.Get<PushItemEvent>().ItemComponent = itemComponent;
                 entity.Get<FactoryTimerBlockComponent>().TimeLeft = factory.SpawnInterval;
             }
         }

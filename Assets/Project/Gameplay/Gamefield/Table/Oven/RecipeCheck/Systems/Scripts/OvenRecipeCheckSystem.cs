@@ -1,7 +1,5 @@
 using Leopotam.Ecs;
-using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Project.Gameplay
 {
@@ -29,24 +27,10 @@ namespace Project.Gameplay
                 if (sauses.Count() < recipeCheckComponent.SauseTarget) continue;
                 if (vegetables.Count() < recipeCheckComponent.VegetablesTarget) continue;
 
-                List<ItemComponent> itemsToDestroy = new();
+                entity.Get<ClearStackEvent>();
 
-                for (int j = 0; j < recipeCheckComponent.BunTarget; j++)
-                    itemsToDestroy.Add(buns.ElementAt(j));
-
-                for (int j = 0; j < recipeCheckComponent.CutletTarget; j++)
-                    itemsToDestroy.Add(cutlets.ElementAt(j));
-
-                for (int j = 0; j < recipeCheckComponent.SauseTarget; j++)
-                    itemsToDestroy.Add(sauses.ElementAt(j));
-
-                for (int j = 0; j < recipeCheckComponent.VegetablesTarget; j++)
-                    itemsToDestroy.Add(vegetables.ElementAt(j));
-
-                Debug.Log(itemsToDestroy.Count);
-
-                entity.Get<RemoveItemsEvent>().Items = itemsToDestroy;
-                entity.Get<OvenCookComponent>().ResultItemPrefab = recipeCheckComponent.ResultItemPrefab;
+                ref var resultEntity = ref recipeCheckComponent.ResultEntityReference.Entity;
+                resultEntity.Get<OvenCookEvent>();
             }
         }
     }
